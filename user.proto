@@ -15,9 +15,16 @@ message TUserKey {
   uint64 Hash = 1;
 }
 
+message TGeo {
+  double Latitude = 1;
+  double Longitude = 2;
+}
+
 message TUser {
   TUserKey Key = 1;
   string Name = 2;
   string Descripton = 3;
   repeated TPhoto Photos = 4;
+
+  TGeo LastGeo = 10;
 }

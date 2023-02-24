@@ -9,6 +9,7 @@ service DatingServer {
   rpc GetUser (UserRequest) returns (UserReply) {}
   rpc SetUser (SetUserRequest) returns (SetUserReply) {}
   rpc SearchAllNeighbours (NeighboursRequest) returns (NeighboursReply) {}
+  rpc FindNearest (NearestRequest) returns (NearestReply) {}
 }
 
 message UserRequest {
@@ -28,13 +29,21 @@ message SetUserReply {
   string ErrorMessage = 2;
 }
 
-
 message NeighboursRequest {
   user.TGeo Geo = 1;
-  string Distance = 2;
+  string Distance = 2 [default = "100km"];
 }
 
 message NeighboursReply {
   repeated user.TUserKey Keys = 1;
+  string ErrorMessage = 2;
+}
+
+message NearestRequest {
+  user.TGeo Geo = 1;
+}
+
+message NearestReply {
+  user.TUser User = 1;
   string ErrorMessage = 2;
 }

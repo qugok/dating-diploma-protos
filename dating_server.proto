@@ -31,7 +31,7 @@ message SetUserReply {
 
 message NeighboursRequest {
   user.TGeo Geo = 1;
-  string Distance = 2 [default = "100km"];
+  string Distance = 2;
 }
 
 message NeighboursReply {

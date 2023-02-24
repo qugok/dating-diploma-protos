@@ -8,6 +8,7 @@ service DatingServer {
 
   rpc GetUser (UserRequest) returns (UserReply) {}
   rpc SetUser (SetUserRequest) returns (SetUserReply) {}
+  rpc SearchAllNeighbours (NeighboursRequest) returns (NeighboursReply) {}
 }
 
 message UserRequest {
@@ -24,5 +25,16 @@ message SetUserRequest {
 
 message SetUserReply {
   User.TUser User = 1;
+  string ErrorMessage = 2;
+}
+
+
+message NeighboursRequest {
+  User.TGeo Geo = 1;
+  string Distance = 2;
+}
+
+message NeighboursReply {
+  repeated User.TUserKey Keys = 1;
   string ErrorMessage = 2;
 }

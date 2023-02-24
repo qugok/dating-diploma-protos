@@ -2,7 +2,7 @@ syntax = "proto3";
 
 import "user.proto";
 
-package Server;
+package server;
 
 service DatingServer {
 
@@ -12,29 +12,29 @@ service DatingServer {
 }
 
 message UserRequest {
-  User.TUserKey Key = 1;
+  user.TUserKey Key = 1;
 }
 
 message UserReply {
-  User.TUser User = 1;
+  user.TUser User = 1;
 }
 
 message SetUserRequest {
-  User.TUser User = 1;
+  user.TUser User = 1;
 }
 
 message SetUserReply {
-  User.TUser User = 1;
+  user.TUser User = 1;
   string ErrorMessage = 2;
 }
 
 
 message NeighboursRequest {
-  User.TGeo Geo = 1;
+  user.TGeo Geo = 1;
   string Distance = 2;
 }
 
 message NeighboursReply {
-  repeated User.TUserKey Keys = 1;
+  repeated user.TUserKey Keys = 1;
   string ErrorMessage = 2;
 }

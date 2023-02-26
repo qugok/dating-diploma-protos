@@ -48,7 +48,6 @@ message NeighboursReply {
 
 message NearestRequest {
   user.TGeo Geo = 1;
-  user.TUserKey Key = 2;
 }
 
 message NearestReply {

@@ -1,23 +1,28 @@
 syntax = "proto3";
 
 import "user.proto";
+import "misc.proto";
 
 package server;
 
 service DatingServer {
-
-  rpc GetUser (UserRequest) returns (UserReply) {}
-  rpc SetUser (SetUserRequest) returns (SetUserReply) {}
-  rpc SearchAllNeighbours (NeighboursRequest) returns (NeighboursReply) {}
-  rpc FindNearest (NearestRequest) returns (NearestReply) {}
+  rpc GetUser             (GetUserRequest)      returns (GetUserReply) {}
+  rpc SetUser             (SetUserRequest)      returns (SetUserReply) {}
+  rpc SearchAllNeighbours (NeighboursRequest)   returns (NeighboursReply) {}
+  rpc FindNearest         (NearestRequest)      returns (NearestReply) {}
+  rpc GetReactions        (GetReactionsRequest) returns (GetReactionsReply) {}
+  rpc SetReaction         (SetReactionRequest)  returns (SetReactionReply) {}
 }
 
-message UserRequest {
+message GetUserRequest {
   user.TUserKey Key = 1;
 }
 
-message UserReply {
+message GetUserReply {
   user.TUser User = 1;
+
+  misc.EReplyStatus Status = 10;
+  misc.TErrorInfo Error = 11;
 }
 
 message SetUserRequest {
@@ -25,8 +30,8 @@ message SetUserRequest {
 }
 
 message SetUserReply {
-  user.TUser User = 1;
-  string ErrorMessage = 2;
+  misc.EReplyStatus Status = 10;
+  misc.TErrorInfo Error = 11;
 }
 
 message NeighboursRequest {
@@ -36,7 +41,9 @@ message NeighboursRequest {
 
 message NeighboursReply {
   repeated user.TUserKey Keys = 1;
-  string ErrorMessage = 2;
+
+  misc.EReplyStatus Status = 10;
+  misc.TErrorInfo Error = 11;
 }
 
 message NearestRequest {
@@ -45,5 +52,32 @@ message NearestRequest {
 
 message NearestReply {
   user.TUser User = 1;
-  string ErrorMessage = 2;
+
+  misc.EReplyStatus Status = 10;
+  misc.TErrorInfo Error = 11;
+}
+
+message GetReactionsRequest {
+  oneof Key {
+    user.TUserKey From = 1;
+    user.TUserKey To = 2;
+  }
+}
+
+message GetReactionsReply {
+  repeated user.TReaction Reactions = 1;
+
+  misc.EReplyStatus Status = 10;
+  misc.TErrorInfo Error = 11;
+}
+
+message SetReactionRequest {
+  user.TUserKey From = 1;
+  user.TUserKey To = 2;
+  user.TReaction.EReactionType Reaction = 3;
+}
+
+message SetReactionReply {
+  misc.EReplyStatus Status = 10;
+  misc.TErrorInfo Error = 11;
 }

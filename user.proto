@@ -28,3 +28,14 @@ message TUser {
 
   TGeo LastGeo = 10;
 }
+
+message TReaction {
+  enum EReactionType {
+    ERT_UNSET = 0;
+    ERT_LIKE = 1;
+    ERT_DISLIKE = 2;
+  }
+  TUserKey From = 1;
+  TUserKey To = 2;
+  EReactionType ReactionType = 3;
+}

@@ -6,16 +6,20 @@ import "misc.proto";
 package server;
 
 service DatingServer {
-  rpc GetUser             (GetUserRequest)      returns (GetUserReply) {}
-  rpc SetUser             (SetUserRequest)      returns (SetUserReply) {}
-  rpc SearchAllNeighbours (NeighboursRequest)   returns (NeighboursReply) {}
-  rpc FindNearest         (NearestRequest)      returns (NearestReply) {}
-  rpc GetReactions        (GetReactionsRequest) returns (GetReactionsReply) {}
-  rpc SetReaction         (SetReactionRequest)  returns (SetReactionReply) {}
+  rpc GetUser             (GetUserRequest)          returns (GetUserReply) {}
+  rpc SetUser             (SetUserRequest)          returns (SetUserReply) {}
+  rpc SearchAllNeighbours (NeighboursRequest)       returns (NeighboursReply) {}
+  rpc FindNearest         (NearestRequest)          returns (NearestReply) {}
+  rpc GetReactions        (GetReactionsRequest)     returns (GetReactionsReply) {}
+  rpc SetReaction         (SetReactionRequest)      returns (SetReactionReply) {}
+  rpc SendMessage         (SendMessageRequest)      returns (SendMessageReply) {}
+  rpc GetLastMessages     (GetLastMessagesRequest)  returns (GetLastMessagesReply) {}
 }
 
 message GetUserRequest {
-  user.TUserKey Key = 1;
+  string UID = 1;
+
+  misc.TAuth Auth = 10;
 }
 
 message GetUserReply {
@@ -27,6 +31,8 @@ message GetUserReply {
 
 message SetUserRequest {
   user.TUser User = 1;
+
+  misc.TAuth Auth = 10;
 }
 
 message SetUserReply {
@@ -37,10 +43,12 @@ message SetUserReply {
 message NeighboursRequest {
   user.TGeo Geo = 1;
   string Distance = 2;
+
+  misc.TAuth Auth = 10;
 }
 
 message NeighboursReply {
-  repeated user.TUserKey Keys = 1;
+  repeated string UIDs = 1;
 
   misc.EReplyStatus Status = 10;
   misc.TErrorInfo Error = 11;
@@ -48,6 +56,8 @@ message NeighboursReply {
 
 message NearestRequest {
   user.TGeo Geo = 1;
+
+  misc.TAuth Auth = 10;
 }
 
 message NearestReply {
@@ -58,10 +68,12 @@ message NearestReply {
 }
 
 message GetReactionsRequest {
-  oneof Key {
-    user.TUserKey From = 1;
-    user.TUserKey To = 2;
+  oneof Key { // TODO убрать oneo  и сделать поля независимыми
+    string FromUID = 1;
+    string ToUID = 2;
   }
+
+  misc.TAuth Auth = 10;
 }
 
 message GetReactionsReply {
@@ -72,12 +84,39 @@ message GetReactionsReply {
 }
 
 message SetReactionRequest {
-  user.TUserKey From = 1;
-  user.TUserKey To = 2;
+  string FromUID = 1;
+  string ToUID = 2;
   user.TReaction.EReactionType Reaction = 3;
+
+  misc.TAuth Auth = 10;
 }
 
 message SetReactionReply {
+  misc.EReplyStatus Status = 10;
+  misc.TErrorInfo Error = 11;
+}
+
+message SendMessageRequest {
+  repeated user.TMessage Messages = 1;
+
+  misc.TAuth Auth = 10;
+}
+
+message SendMessageReply {
+  misc.EReplyStatus Status = 10;
+  misc.TErrorInfo Error = 11;
+}
+
+message GetLastMessagesRequest {
+  string FromUID = 1;
+  string ToUID = 2;
+
+  misc.TAuth Auth = 10;
+}
+
+message GetLastMessagesReply {
+  repeated user.TMessage Messages = 1;
+
   misc.EReplyStatus Status = 10;
   misc.TErrorInfo Error = 11;
 }

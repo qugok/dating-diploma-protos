@@ -39,3 +39,13 @@ message TReaction {
   TUserKey To = 2;
   EReactionType ReactionType = 3;
 }
+
+message TMessage {
+  // техническая информация
+  TUserKey FromKey = 1;
+  TUserKey ToKey = 2;
+  uint64 Timestamp = 4;
+
+  // Контент
+  string Text = 10;
+}

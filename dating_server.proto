@@ -17,7 +17,7 @@ service DatingServer {
 }
 
 message GetUserRequest {
-  user.TUserKey Key = 1;
+  string UID = 1;
 
   misc.TAuth Auth = 10;
 }
@@ -48,7 +48,7 @@ message NeighboursRequest {
 }
 
 message NeighboursReply {
-  repeated user.TUserKey Keys = 1;
+  repeated string UIDs = 1;
 
   misc.EReplyStatus Status = 10;
   misc.TErrorInfo Error = 11;
@@ -68,9 +68,9 @@ message NearestReply {
 }
 
 message GetReactionsRequest {
-  oneof Key {
-    user.TUserKey From = 1;
-    user.TUserKey To = 2;
+  oneof Key { // TODO убрать oneo  и сделать поля независимыми
+    string FromUID = 1;
+    string ToUID = 2;
   }
 
   misc.TAuth Auth = 10;
@@ -84,8 +84,8 @@ message GetReactionsReply {
 }
 
 message SetReactionRequest {
-  user.TUserKey From = 1;
-  user.TUserKey To = 2;
+  string FromUID = 1;
+  string ToUID = 2;
   user.TReaction.EReactionType Reaction = 3;
 
   misc.TAuth Auth = 10;
@@ -108,8 +108,8 @@ message SendMessageReply {
 }
 
 message GetLastMessagesRequest {
-  user.TUserKey From = 1;
-  user.TUserKey To = 2;
+  string FromUID = 1;
+  string ToUID = 2;
 
   misc.TAuth Auth = 10;
 }

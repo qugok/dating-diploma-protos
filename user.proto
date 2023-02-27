@@ -11,17 +11,13 @@ message TPhoto {
   bytes Data = 2;
 }
 
-message TUserKey {
-  uint64 Hash = 1;
-}
-
 message TGeo {
   double Latitude = 1;
   double Longitude = 2;
 }
 
 message TUser {
-  TUserKey Key = 1;
+  string UID = 1; // уникальный индентификатор пользователя
   string Name = 2;
   string Descripton = 3;
   repeated TPhoto Photos = 4;
@@ -35,15 +31,15 @@ message TReaction {
     ERT_LIKE = 1;
     ERT_DISLIKE = 2;
   }
-  TUserKey From = 1;
-  TUserKey To = 2;
+  string FromUID = 1;
+  string ToUID = 2;
   EReactionType ReactionType = 3;
 }
 
 message TMessage {
   // техническая информация
-  TUserKey FromKey = 1;
-  TUserKey ToKey = 2;
+  string FromUID = 1;
+  string ToUID = 2;
   uint64 Timestamp = 4;
 
   // Контент

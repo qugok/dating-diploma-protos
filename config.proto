@@ -5,4 +5,7 @@ package config;
 message TPrivateData {
   string Username = 1;
   string Password = 2;
+  string FirebaseSecret = 3;
+  string FirebaseUrl = 4;
+  
 }

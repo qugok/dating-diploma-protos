@@ -7,9 +7,9 @@ package server;
 
 service DatingServer {
   rpc GetUser             (GetUserRequest)          returns (GetUserReply) {}
-  rpc SetUser             (SetUserRequest)          returns (SetUserReply) {}
-  rpc SearchAllNeighbours (NeighboursRequest)       returns (NeighboursReply) {}
-  rpc FindNearest         (NearestRequest)          returns (NearestReply) {}
+  rpc RegisterUser        (RegisterUserRequest)     returns (RegisterUserReply) {}
+  rpc UpdateUser          (UpdateUserRequest)       returns (UpdateUserReply) {}
+  rpc SearchUsers         (SearchUsersRequest)      returns (SearchUsersReply) {}
   rpc GetReactions        (GetReactionsRequest)     returns (GetReactionsReply) {}
   rpc SetReaction         (SetReactionRequest)      returns (SetReactionReply) {}
   rpc SendMessage         (SendMessageRequest)      returns (SendMessageReply) {}
@@ -29,39 +29,41 @@ message GetUserReply {
   misc.TErrorInfo Error = 11;
 }
 
-message SetUserRequest {
+
+message RegisterUserRequest {
   user.TUser User = 1;
 
   misc.TAuth Auth = 10;
 }
 
-message SetUserReply {
+message RegisterUserReply {
   misc.EReplyStatus Status = 10;
   misc.TErrorInfo Error = 11;
 }
 
-message NeighboursRequest {
+
+message UpdateUserRequest {
+  user.TUser User = 1;
+
+  misc.TAuth Auth = 10;
+}
+
+message UpdateUserReply {
+  misc.EReplyStatus Status = 10;
+  misc.TErrorInfo Error = 11;
+}
+
+
+message SearchUsersRequest {
   user.TGeo Geo = 1;
   string Distance = 2;
+  // other filters
 
   misc.TAuth Auth = 10;
 }
 
-message NeighboursReply {
-  repeated string UIDs = 1;
-
-  misc.EReplyStatus Status = 10;
-  misc.TErrorInfo Error = 11;
-}
-
-message NearestRequest {
-  user.TGeo Geo = 1;
-
-  misc.TAuth Auth = 10;
-}
-
-message NearestReply {
-  user.TUser User = 1;
+message SearchUsersReply {
+  repeated user.TUser Users = 1;
 
   misc.EReplyStatus Status = 10;
   misc.TErrorInfo Error = 11;
@@ -83,6 +85,7 @@ message GetReactionsReply {
   misc.TErrorInfo Error = 11;
 }
 
+
 message SetReactionRequest {
   string FromUID = 1;
   string ToUID = 2;
@@ -96,6 +99,7 @@ message SetReactionReply {
   misc.TErrorInfo Error = 11;
 }
 
+
 message SendMessageRequest {
   repeated user.TMessage Messages = 1;
 
@@ -106,6 +110,7 @@ message SendMessageReply {
   misc.EReplyStatus Status = 10;
   misc.TErrorInfo Error = 11;
 }
+
 
 message GetLastMessagesRequest {
   string FromUID = 1;

@@ -7,5 +7,14 @@ message TPrivateData {
   string Password = 2;
   string FirebaseSecret = 3;
   string FirebaseUrl = 4;
-  
+}
+
+message TAuthConfig {
+  bool Enabled = 1;
+}
+
+message TServerConfig {
+  TAuthConfig Auth = 1;
+
+  string PrivateDataPath = 10;
 }

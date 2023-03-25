@@ -23,6 +23,7 @@ message TUser {
   repeated TPhoto Photos = 4;
 
   TGeo LastGeo = 10;
+  uint32 SearchDistanceKm = 11;
 }
 
 message TReaction {

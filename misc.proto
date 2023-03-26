@@ -14,6 +14,7 @@ message TErrorInfo {
         EET_INTERNAL = 1;
         EET_AUTHORIZATION = 2;
         EET_AUTHENTIFICATION = 3;
+        EET_USER_DONT_REGISTERED = 4;
     }
     // нужно будет добавить какую-нибудь типизацию ошибок - некорректный запрос / retryable ошибка и т.п
 

@@ -1,14 +1,32 @@
 syntax = "proto3";
 
 package user;
+# TODO не хардкодить префиксы путей, а задать их как опции енама
+enum EMediaType {
+  EMT_UNKNOWN = 0;
+  EMT_PHOTO = 1;
+  EMT_VIDEO = 2;
+  EMT_AUDIO = 3;
+}
 
-message TPhoto {
-  enum EPhotoType {
-    EPT_UNKNOWN = 0;
-    EPT_JPG = 1;
+message TMetaMedia {
+
+  EMediaType Type = 1;
+  string Path = 2;
+}
+
+message TLoadingMedia {
+  enum ELoadType {
+    ELT_UNKNOWN = 0;
+    ELT_FULL = 1;
+    ELT_BY_PART = 2;
   }
-  EPhotoType Type = 1;
-  bytes Data = 2;
+
+  EMediaType Type = 1;
+  ELoadType LoadType = 2;
+  string Path = 3;
+  bytes Data = 4;
+  uint32 PartNumber = 5;
 }
 
 message TGeo {
@@ -20,7 +38,7 @@ message TUser {
   string UID = 1; // уникальный индентификатор пользователя
   string Name = 2;
   string Description = 3;
-  repeated TPhoto Photos = 4;
+  repeated TMetaMedia Media = 4;
 
   TGeo LastGeo = 10;
   uint32 SearchDistanceKm = 11;

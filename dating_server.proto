@@ -43,7 +43,7 @@ message RegisterUserReply {
 
 
 message UpdateUserRequest {
-  user.TUser User = 1;
+  user.TUser UserDelta = 1;
 
   misc.TAuth Auth = 10;
 }

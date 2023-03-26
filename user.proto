@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package user;
-# TODO не хардкодить префиксы путей, а задать их как опции енама
+// TODO не хардкодить префиксы путей, а задать их как опции енама
 enum EMediaType {
   EMT_UNKNOWN = 0;
   EMT_PHOTO = 1;

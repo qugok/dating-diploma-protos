@@ -19,7 +19,7 @@ message TGeo {
 message TUser {
   string UID = 1; // уникальный индентификатор пользователя
   string Name = 2;
-  string Descripton = 3; // TODO переименовать в Description
+  string Description = 3;
   repeated TPhoto Photos = 4;
 
   TGeo LastGeo = 10;

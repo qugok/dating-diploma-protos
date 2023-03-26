@@ -55,8 +55,9 @@ message UpdateUserReply {
 
 
 message SearchUsersRequest {
-  user.TGeo Geo = 1;
-  string Distance = 2;
+  string UID = 1;
+  user.TGeo Geo = 2;
+  string Distance = 3;
   // other filters
 
   misc.TAuth Auth = 10;

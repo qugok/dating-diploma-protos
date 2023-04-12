@@ -3,6 +3,19 @@ syntax = "proto3";
 package config;
 
 message TPrivateData {
-  string Username = 1;
-  string Password = 2;
+  string CouchbaseUsername = 1;
+  string CouchbasePassword = 2;
+  string CouchbaseAddress = 3;
+  string FirebaseSecret = 4;
+  string FirebaseUrl = 5;
+}
+
+message TAuthConfig {
+  bool Enabled = 1;
+}
+
+message TServerConfig {
+  TAuthConfig Auth = 1;
+
+  string PrivateDataPath = 10;
 }

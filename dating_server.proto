@@ -12,6 +12,8 @@ service DatingServer {
 
   rpc SearchUsers         (SearchUsersRequest)      returns (SearchUsersReply) {}
 
+  rpc SetMessageToken     (SetMessageTokenRequest)  returns (SetMessageTokenReply) {}
+
   rpc GetReactions        (GetReactionsRequest)     returns (GetReactionsReply) {}
   rpc SetReaction         (SetReactionRequest)      returns (SetReactionReply) {}
 
@@ -76,6 +78,20 @@ message SearchUsersReply {
   misc.TErrorInfo Error = 11;
 }
 
+
+message SetMessageTokenRequest {
+  string UID = 1;
+  string Token = 2;
+
+  misc.TAuth Auth = 10;
+}
+
+message SetMessageTokenReply {
+  misc.EReplyStatus Status = 10;
+  misc.TErrorInfo Error = 11;
+}
+
+
 message GetReactionsRequest {
   oneof Key { // TODO убрать oneo  и сделать поля независимыми
     string FromUID = 1;
@@ -102,6 +118,8 @@ message SetReactionRequest {
 }
 
 message SetReactionReply {
+  bool Match = 1;
+
   misc.EReplyStatus Status = 10;
   misc.TErrorInfo Error = 11;
 }

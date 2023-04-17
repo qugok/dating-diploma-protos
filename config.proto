@@ -14,8 +14,30 @@ message TAuthConfig {
   bool Enabled = 1;
 }
 
-message TServerConfig {
+message TQueueClientConfig {
+  message TTopicMap {
+    string From = 1;
+    string To = 2;
+  }
+
+  string UserName = 1;
+  repeated TTopicMap TopicMapping = 2;
+}
+
+
+
+
+message TProcessorConfig {
+  TQueueClientConfig QueueClientConfig = 1;
+}
+
+message TEngineConfig {
   TAuthConfig Auth = 1;
+  TQueueClientConfig QueueClientConfig = 2;
 
   string PrivateDataPath = 10;
+}
+
+message TMediaConfig {
+  TAuthConfig Auth = 1;
 }

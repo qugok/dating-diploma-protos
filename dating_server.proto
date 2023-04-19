@@ -20,6 +20,8 @@ service DatingServer {
   rpc SendMessage         (SendMessageRequest)      returns (SendMessageReply) {}
   rpc GetLastMessages     (GetLastMessagesRequest)  returns (GetLastMessagesReply) {}
 
+  rpc GetChats            (GetChatsRequest)         returns (GetChatsReply) {}
+
   rpc UploadMedia         (UploadMediaRequest)      returns (UploadMediaReply) {}
   rpc DownloadMedia       (DownloadMediaRequest)    returns (DownloadMediaReply) {}
 }
@@ -93,10 +95,8 @@ message SetMessageTokenReply {
 
 
 message GetReactionsRequest {
-  oneof Key { // TODO убрать oneo  и сделать поля независимыми
-    string FromUID = 1;
-    string ToUID = 2;
-  }
+  string FromUID = 1;
+  string ToUID = 2;
 
   misc.TAuth Auth = 10;
 }
@@ -146,6 +146,20 @@ message GetLastMessagesRequest {
 
 message GetLastMessagesReply {
   repeated user.TMessage Messages = 1;
+
+  misc.EReplyStatus Status = 10;
+  misc.TErrorInfo Error = 11;
+}
+
+
+message GetChatsRequest {
+  string UID = 1;
+
+  misc.TAuth Auth = 10;
+}
+
+message GetChatsReply {
+  repeated user.TChat Chats = 1;
 
   misc.EReplyStatus Status = 10;
   misc.TErrorInfo Error = 11;

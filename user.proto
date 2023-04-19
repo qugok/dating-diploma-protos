@@ -53,6 +53,7 @@ message TReaction {
   string FromUID = 1;
   string ToUID = 2;
   EReactionType ReactionType = 3;
+  bool IsMatch = 4;
 }
 
 message TMessage {
@@ -63,4 +64,11 @@ message TMessage {
 
   // Контент
   string Text = 10;
+}
+
+message TChat {
+  string UID1 = 1;
+  string UID2 = 2;
+  TMessage LastMessage = 3;
+  // можно добавить инфу о теме чата и пр
 }

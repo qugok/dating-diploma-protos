@@ -28,7 +28,10 @@ message TQueueClientConfig {
 
 
 message TProcessorConfig {
-  TQueueClientConfig QueueClientConfig = 1;
+  TAuthConfig Auth = 1;
+  TQueueClientConfig QueueClientConfig = 2;
+
+  string PrivateDataPath = 10;
 }
 
 message TEngineConfig {

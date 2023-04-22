@@ -39,7 +39,6 @@ message TUser {
   string Name = 2;
   string Description = 3;
   repeated TMetaMedia Media = 4;
-
   TGeo LastGeo = 10;
   uint32 SearchDistanceKm = 11;
 }

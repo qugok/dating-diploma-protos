@@ -26,6 +26,10 @@ message TQueueClientConfig {
 
 
 
+message TStreamingConfig {
+  TAuthConfig Auth = 1;
+  TQueueClientConfig QueueClientConfig = 2;
+}
 
 message TProcessorConfig {
   TAuthConfig Auth = 1;

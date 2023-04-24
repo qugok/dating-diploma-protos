@@ -24,6 +24,8 @@ service DatingServer {
 
   rpc UploadMedia         (UploadMediaRequest)      returns (UploadMediaReply) {}
   rpc DownloadMedia       (DownloadMediaRequest)    returns (DownloadMediaReply) {}
+
+  rpc GetUpdates          (GetUpdatesRequest)       returns (stream GetUpdatesReply) {}
 }
 
 message GetUserRequest {
@@ -189,6 +191,21 @@ message DownloadMediaRequest {
 message DownloadMediaReply {
   user.TLoadingMedia Media = 1;
 
+  misc.EReplyStatus Status = 10;
+  misc.TErrorInfo Error = 11;
+}
+
+message GetUpdatesRequest {
+  string UID = 1;
+
+  misc.TAuth Auth = 10;
+}
+
+message GetUpdatesReply {
+  repeated user.TMessage Messages = 1;
+  repeated user.TReaction Reactions = 2;
+
+  // кажется, они тут бесполезны, но для единообразности оставлю
   misc.EReplyStatus Status = 10;
   misc.TErrorInfo Error = 11;
 }

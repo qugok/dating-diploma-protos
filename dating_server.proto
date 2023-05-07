@@ -97,8 +97,12 @@ message SetMessageTokenReply {
 
 
 message GetReactionsRequest {
-  string FromUID = 1;
+  string FromUID = 1; // оба поля проставлять необязательно, но хотя бы одно должно быть
   string ToUID = 2;
+  bool OnlyMatches = 3; // по дефолту false, работает если указан только один UID
+
+  uint32 Offset = 5; // по дефолту 0
+  uint32 Count = 6;  // по дефолту 100
 
   misc.TAuth Auth = 10;
 }
@@ -138,10 +142,13 @@ message SendMessageReply {
   misc.TErrorInfo Error = 11;
 }
 
-
+// TODO переименовать GetLastMessages -> GetMessages
 message GetLastMessagesRequest {
   string FromUID = 1;
   string ToUID = 2;
+
+  uint32 Offset = 5; // по дефолту 0
+  uint32 Count = 6;  // по дефолту 100
 
   misc.TAuth Auth = 10;
 }
@@ -156,6 +163,9 @@ message GetLastMessagesReply {
 
 message GetChatsRequest {
   string UID = 1;
+
+  uint32 Offset = 5; // по дефолту 0
+  uint32 Count = 6;  // по дефолту 100
 
   misc.TAuth Auth = 10;
 }

@@ -34,11 +34,48 @@ message TGeo {
   double Longitude = 2;
 }
 
+enum EInterestType {
+  EIT_UNKNOWN = 0;
+  EIT_MATH = 1;         // математика
+  EIT_BOOKS = 2;        // чтение книг
+  EIT_MOVIES = 3;       // просмотр кино
+  EIT_PROGRAMMING = 4;  // программирование
+  EIT_WALKING = 5;      // прогулки на свежем воздухе
+  EIT_DRAWING = 6;      // рисование
+  EIT_IDLENESS = 7;     // ничегонеделанье
+}
+
+message TInterests {
+  message TInterest {
+    EInterestType Type = 1;
+    uint32 Value = 2;   // пока можно ставить что угодно, но предполагается числовое значение от 0 до 100
+  }
+  // предлагаю чётко зафиксировать число интересов и их колличество
+  TInterest Interest1 = 1;
+  TInterest Interest2 = 2;
+  TInterest Interest3 = 3;
+  TInterest Interest4 = 4;
+  TInterest Interest5 = 5;
+}
+
+enum EGender {
+  EG_UNKNOWN = 0;
+  EG_MALE = 1;
+  EG_FEMALE = 2;
+}
+
 message TUser {
   string UID = 1; // уникальный индентификатор пользователя
   string Name = 2;
   string Description = 3;
   repeated TMetaMedia Media = 4;
+
+  EGender Gender = 5;
+  EGender LookingForGender = 6;
+  uint32 Age = 7;
+
+  TInterests Interests = 8;
+
   TGeo LastGeo = 10;
   uint32 SearchDistanceKm = 11;
 }
@@ -53,6 +90,7 @@ message TReaction {
   string ToUID = 2;
   EReactionType ReactionType = 3;
   bool IsMatch = 4;
+  // TODO добавить время мэтча для сортировки
 }
 
 message TMessage {

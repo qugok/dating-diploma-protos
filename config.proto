@@ -8,6 +8,9 @@ message TPrivateData {
   string CouchbaseAddress = 3;
   string FirebaseSecret = 4;
   string FirebaseUrl = 5;
+  string RedisHost = 6;
+  string RedisPort = 7;
+  string RedisPassword = 8;
 }
 
 message TAuthConfig {
@@ -29,6 +32,8 @@ message TQueueClientConfig {
 message TStreamingConfig {
   TAuthConfig Auth = 1;
   TQueueClientConfig QueueClientConfig = 2;
+
+  string PrivateDataPath = 10;
 }
 
 message TProcessorConfig {

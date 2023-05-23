@@ -90,7 +90,7 @@ message TReaction {
   string ToUID = 2;
   EReactionType ReactionType = 3;
   bool IsMatch = 4;
-  // TODO добавить время мэтча для сортировки
+  uint64 Timestamp = 5;
 }
 
 message TMessage {
@@ -102,9 +102,7 @@ message TMessage {
 
   // Контент
   string Text = 10;
-
-  // TODO добавить поле с прикрепленной к сообщению медийкой и правильно его обрабатывать
-  // TMetaMedia media = 11;
+  TMetaMedia Media = 11;
 }
 
 message TChat {

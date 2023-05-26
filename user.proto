@@ -109,5 +109,6 @@ message TChat {
   string UID1 = 1;
   string UID2 = 2;
   TMessage LastMessage = 3;
+  uint64 TotalMessageCount = 4;
   // можно добавить инфу о теме чата и пр
 }

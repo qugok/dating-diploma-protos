@@ -16,6 +16,8 @@ message TErrorInfo {
         EET_AUTHENTIFICATION = 3;
         EET_USER_DONT_REGISTERED = 4;
         EET_STREAMING = 5;
+        EET_BAD_REQUEST = 6;
+        EET_WRONG_REQUEST_DATA = 7;
     }
     // нужно будет добавить какую-нибудь типизацию ошибок - некорректный запрос / retryable ошибка и т.п
 
